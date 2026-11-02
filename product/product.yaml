@@ -1,0 +1,12 @@
+_ > nanoagent.plugin.v0001.ProductConfig:
+tagline: "See who is playing Houston on the dates you are free, most popular artists first"
+summary: "Give the agent a range of dates in the coming month, such as this weekend. It lists the artists headlining a Houston concert then, each with the date and venue of their first show in that range, ranked by how many listeners they have on Last.fm. Shows come from SeatGeek and listener counts from Last.fm, frozen in the plugin so every answer can be checked exactly."
+highlights:
+  - "Any range of dates in a fixed 30-day window, from one night to the whole month"
+  - "Ranked by Last.fm listeners, the most popular artists first"
+  - "One row per artist, with their first show in your dates"
+  - "A rule-based check compares every row with the answer key"
+steps:
+  - "Say the dates you are free, such as November 14 to 16"
+  - "The agent finds every artist headlining a Houston show then"
+  - "See the top 20 by listeners with date, venue and every check of the verdict"

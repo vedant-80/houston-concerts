@@ -1,0 +1,44 @@
+{
+  "fetched_at": "2026-11-02T15:49:05Z",
+  "window": {
+    "start": "2026-11-02",
+    "end": "2026-12-02"
+  },
+  "seatgeek": {
+    "url": "https://api.seatgeek.com/2/events",
+    "venue.city": "Houston",
+    "venue.state": "TX",
+    "taxonomies.name": "concert",
+    "status dropped": [
+      "canceled",
+      "cancelled",
+      "postponed"
+    ]
+  },
+  "lastfm": {
+    "url": "https://ws.audioscrobbler.com/2.0/",
+    "method": "artist.getinfo",
+    "autocorrect": 0,
+    "figure": "artist.stats.listeners"
+  },
+  "counts": {
+    "events fetched": 129,
+    "dropped: headliner not on Last.fm": 11,
+    "kept: shows": 118,
+    "kept: artists": 113
+  },
+  "unknown_on_lastfm": [
+    "2000s Rave",
+    "BEAT - King Crimson Tribute",
+    "Breakaway Music Festival",
+    "Kawaii Rave",
+    "Lil Peep 30th Birthday Celebration",
+    "OCT (On Company Time)",
+    "The Fab Four - The Ultimate Tribute",
+    "The Music of Hey Arnold! Live",
+    "VHT - Van Halen Tribute"
+  ],
+  "outputs": {
+    "concerts.json.gz": "36b8dbadac75fec29fc74444397d686fc6d9f2707fd6ab8713e7d5a3a58d5551"
+  }
+}

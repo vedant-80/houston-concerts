@@ -1,0 +1,43 @@
+_ > nanoagent.plugin.v0001.ManifestConfig:
+id: houston-concerts
+name: Houston Concerts
+version: 0.1.0
+status: ready
+spec: nanoagent.plugin/v0001
+
+runtime > nanoagent.plugin.v0001.RuntimeConfig:
+  type: mcp_stdio
+  command: [uv, run, --frozen, python, -m, plugin]
+
+# The concerts are a frozen SeatGeek + Last.fm snapshot shipped in the plugin: no network.
+permissions > nanoagent.plugin.v0001.PermissionsConfig:
+  network > nanoagent.plugin.v0001.NetworkConfig:
+    hosts: []
+  filesystem > nanoagent.plugin.v0001.FilesystemConfig:
+    write: [workspace]
+
+# One entry per contract.Tool; its input and output classes are contract.TOOLS's.
+tools > dict[contract.Tool, nanoagent.plugin.v0001.ToolConfig]:
+  find_concerts:
+    description: List the artists headlining a Houston concert between two dates in the snapshot's month, each with the date and venue of their first show in that range, ranked by Last.fm listeners (top 20)
+  artist_shows:
+    description: List every Houston show one artist headlines in the snapshot's month, with dates, times and venues
+  pin_concerts:
+    description: Pin the answer key, every Houston show in the snapshot and every headliner's Last.fm listeners
+
+# One entry per contract.Task; its input class is contract.TASKS's.
+tasks > dict[contract.Task, nanoagent.plugin.v0001.TaskConfig]:
+  find-concerts:
+    description: Find concerts in Houston between two dates in the next month and list each artist with their first show then, most-listened-to artists first
+    runner: agent
+    tools: [find_concerts]
+    reference: pin_concerts
+    instructions: |-
+      Plan. Exactly two tool calls, nothing else: (1) find_concerts with the task's start_date and end_date exactly as given; (2) submit. Never call find_concerts twice and keep reasoning to one short line.
+      Submit find_concerts' result unchanged: start_date, end_date, window and total_artists as returned, and concerts with the same rows in the same order, each artist, listeners, date and venue copied character for character. Never re-sort, drop, add or reword a row. If concerts is [], submit it as [].
+  artist-shows:
+    description: Show every Houston concert one artist headlines in the snapshot's month, with dates, times and venues
+    runner: tool
+    tools: [artist_shows]
+    reference: null
+    instructions: Call artist_shows with the artist's name as the person gave it.
